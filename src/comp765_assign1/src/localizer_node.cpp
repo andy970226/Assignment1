@@ -26,7 +26,7 @@ public:
 
   ros::Subscriber motion_command_sub;
 
-  geometry_msgs::PoseStamped estimated_location;
+  geometry_msgs::PoseStamped estimated_location;  //!!
 
   cv::Mat map_image;
   cv::Mat localization_result_image;
@@ -73,12 +73,12 @@ public:
   //
   // Note that we use negative angles because the geometry of the map image is formed with its Z axis pointing downwards
   // (the camera is looking at the ocean floor)
-  //
+  // 
   void motionCommandCallback(const geometry_msgs::PoseStamped::ConstPtr& motion_command ){
 
-    geometry_msgs::PoseStamped command = *motion_command;
+    geometry_msgs::PoseStamped command = *motion_command;  //??
     double target_roll, target_pitch, target_yaw;
-    tf::Quaternion target_orientation;
+    tf::Quaternion target_orientation;   
     tf::quaternionMsgToTF(command.pose.orientation, target_orientation);
     tf::Matrix3x3(target_orientation).getEulerYPR( target_yaw, target_pitch, target_roll );
 
@@ -113,7 +113,7 @@ public:
       sensor_msgs::ImagePtr msg = cv_bridge::CvImage(std_msgs::Header(), "bgr8", localization_result_image).toImageMsg();
       pub.publish(msg);
 
-      ros::spinOnce();
+      ros::spinOnce();//调用后还可以继续执行之后的程序。
       loop_rate.sleep();
     }
   }
