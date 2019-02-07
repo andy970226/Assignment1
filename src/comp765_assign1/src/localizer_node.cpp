@@ -14,7 +14,7 @@
 
 // Class Localizer is a sample stub that you can build upon for your implementation
 // (advised but optional: starting from scratch is also fine)
-//
+// ...
 class Localizer {
 
 public:
